@@ -6,7 +6,7 @@ Built for developers and AI agents: REST API, hosted MCP server, SDKs.
 
 This gem is the Ruby client for the **SMS verification** part of the platform: real physical SIM cards, not VoIP, so codes land on WhatsApp, Telegram, banking apps, and anything else that blocks virtual numbers. Predictable pricing and live number availability are visible before you ever spend a credit.
 
-> **What this SDK does vs. the full platform:** this gem talks to the SMS verification API only (balance, number requests, SMS polling, cancel/complete). Matching-country proxies and the private cloud browser are part of the wider VirtualSMS platform but are **not yet wrapped by this gem**. Use the [REST API](https://virtualsms.io/docs) directly, or the [hosted MCP server](https://virtualsms.io/mcp) if you're driving this from an AI agent. Ruby coverage for proxies/cloud browser is on the roadmap, not shipped yet.
+> **What this SDK does vs. the full platform:** this gem talks to the SMS verification API only (balance, number requests, SMS polling, cancel/complete). Matching-country proxies are live on the wider VirtualSMS platform but are **not yet wrapped by this gem**. The private cloud browser is planned, coming soon, not yet available on any surface, SDK or otherwise. Use the [REST API](https://virtualsms.io/docs) directly, or the [hosted MCP server](https://virtualsms.io/mcp) if you're driving this from an AI agent. Ruby coverage for proxies is on the roadmap, not shipped yet.
 
 ## Installation
 
@@ -91,7 +91,7 @@ Poll automatically until code arrives. Default timeout: 5 minutes.
 ### `done(activation_id)` / `cancel(activation_id)`
 Complete or cancel an activation.
 
-**Note:** this gem covers SMS verification only. Rentals, proxies, and cloud browser sessions are not exposed by any client method above. Reach for the [REST API](https://virtualsms.io/docs) or [hosted MCP server](https://virtualsms.io/mcp) for those.
+**Note:** this gem covers SMS verification only. Rentals and proxies (both live on the platform) are not exposed by any client method above. Reach for the [REST API](https://virtualsms.io/docs) or [hosted MCP server](https://virtualsms.io/mcp) for those. The private cloud browser is planned, coming soon, and isn't available on any surface yet.
 
 ## Migrating from DaisySMS?
 
