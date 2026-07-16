@@ -2,11 +2,11 @@ require 'net/http'
 require 'uri'
 require 'json'
 
-# VirtualSMS Ruby SDK — SMS verification with real carrier SIMs.
+# VirtualSMS Ruby SDK: SMS verification with real physical SIM cards.
 #
-# Unlike VoIP services, VirtualSMS uses real carrier-issued SIM cards across
-# 145+ countries. 95%+ delivery rates on WhatsApp, Telegram, and platforms
-# that block virtual numbers.
+# Unlike VoIP services, VirtualSMS uses real physical SIM cards on carrier
+# networks across 145+ countries, with 95%+ delivery rates on WhatsApp,
+# Telegram, and platforms that block virtual numbers.
 #
 # Get your API key at https://virtualsms.io (Settings → API Keys)
 # API Docs: https://virtualsms.io/api

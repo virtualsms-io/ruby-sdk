@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.description   = 'VirtualSMS is an account verification platform that combines real carrier ' \
                         'mobile numbers, matching-country proxies and a private cloud browser into ' \
                         'one connected workflow. This gem is the Ruby SDK for SMS verification: ' \
-                        'real carrier numbers, not VoIP, across WhatsApp, Telegram, Google and ' \
+                        'real physical SIM cards, not VoIP, across WhatsApp, Telegram, Google and ' \
                         '2500+ services in 145+ countries, with 95%+ delivery on real carrier SIMs. ' \
                         'Crypto payments. API compatible with the sms-activate protocol. See ' \
                         'https://virtualsms.io/docs for full platform access.'

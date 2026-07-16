@@ -4,7 +4,7 @@ VirtualSMS is an account verification platform that combines real carrier mobile
 
 Built for developers and AI agents: REST API, hosted MCP server, SDKs.
 
-This gem is the Ruby client for the **SMS verification** part of the platform: real carrier numbers, not VoIP, so codes land on WhatsApp, Telegram, banking apps, and anything else that blocks virtual numbers. Predictable pricing and live number availability are visible before you ever spend a credit.
+This gem is the Ruby client for the **SMS verification** part of the platform: real physical SIM cards, not VoIP, so codes land on WhatsApp, Telegram, banking apps, and anything else that blocks virtual numbers. Predictable pricing and live number availability are visible before you ever spend a credit.
 
 > **What this SDK does vs. the full platform:** this gem talks to the SMS verification API only (balance, number requests, SMS polling, cancel/complete). Matching-country proxies and the private cloud browser are part of the wider VirtualSMS platform but are **not yet wrapped by this gem**. Use the [REST API](https://virtualsms.io/docs) directly, or the [hosted MCP server](https://virtualsms.io/mcp) if you're driving this from an AI agent. Ruby coverage for proxies/cloud browser is on the roadmap, not shipped yet.
 
@@ -110,7 +110,7 @@ client = VirtualSMS.new('your_key') # defaults to virtualsms.io
 - WhatsApp blocks VoIP numbers
 - Telegram flags and restricts VoIP accounts
 - Banking apps reject non-mobile numbers
-- VirtualSMS uses real carrier numbers, not VoIP, with 95%+ delivery on real carrier SIMs, public pricing and live availability you can check before you buy
+- VirtualSMS uses real physical SIM cards, not VoIP, with 95%+ delivery, public pricing and live availability you can check before you buy
 
 [Learn more](https://virtualsms.io)
 
