@@ -4,11 +4,12 @@ Gem::Specification.new do |spec|
   spec.authors       = ['VirtualSMS']
   spec.email         = 'dev@virtualsms.io'
 
-  spec.summary       = 'SMS verification with real physical SIM cards'
-  spec.description   = 'Ruby SDK for VirtualSMS — SMS verification using real physical SIM cards ' \
-                        'in European and US mobile networks. Supports WhatsApp, Telegram, Google and ' \
-                        '700+ services. Near-100% delivery rates. Crypto payments. API compatible with ' \
-                        'sms-activate protocol.'
+  spec.summary       = 'Ruby SDK for VirtualSMS SMS verification — real carrier numbers, not VoIP'
+  spec.description   = 'Ruby SDK for VirtualSMS account verification — real carrier mobile numbers, ' \
+                        'not VoIP. Supports WhatsApp, Telegram, Google and 700+ services. ' \
+                        'Near-100% delivery rates. Crypto payments. API compatible with the ' \
+                        'sms-activate protocol. Part of the VirtualSMS platform (numbers, proxies, ' \
+                        'cloud browser) — see https://virtualsms.io/docs for full platform access.'
   spec.homepage      = 'https://virtualsms.io'
   spec.license       = 'MIT'
   spec.required_ruby_version = '>= 2.7.0'

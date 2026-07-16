@@ -1,8 +1,12 @@
 # VirtualSMS Ruby SDK
 
-Ruby client for [VirtualSMS](https://virtualsms.io) — SMS verification using real physical SIM cards.
+VirtualSMS is an account verification platform that combines real carrier mobile numbers, matching-country proxies and a private cloud browser into one connected workflow.
 
-Unlike VoIP-based services, VirtualSMS uses real SIM cards in hardware modems connected to European and US cellular networks. Near-100% delivery rates on platforms like WhatsApp, Telegram, and banking apps that block virtual numbers.
+Built for developers and AI agents: REST API, hosted MCP server, SDKs.
+
+This gem is the Ruby client for the **SMS verification** part of the platform — real carrier numbers, not VoIP, for near-100% delivery on WhatsApp, Telegram, banking apps, and anything else that blocks virtual numbers. Predictable pricing and live number availability are visible before you ever spend a credit.
+
+> **What this SDK does vs. the full platform:** this gem talks to the SMS verification API only (balance, number requests, SMS polling, cancel/complete). Matching-country proxies and the private cloud browser are part of the wider VirtualSMS platform but are **not yet wrapped by this gem** — use the [REST API](https://virtualsms.io/docs) directly, or the [hosted MCP server](https://virtualsms.io/mcp) if you're driving this from an AI agent. Ruby coverage for proxies/cloud browser is on the roadmap — not shipped yet.
 
 ## Installation
 
@@ -87,6 +91,8 @@ Poll automatically until code arrives. Default timeout: 5 minutes.
 ### `done(activation_id)` / `cancel(activation_id)`
 Complete or cancel an activation.
 
+**Note:** this gem covers SMS verification only — rentals, proxies, and cloud browser sessions are not exposed by any client method above. Reach for the [REST API](https://virtualsms.io/docs) or [hosted MCP server](https://virtualsms.io/mcp) for those.
+
 ## Migrating from DaisySMS?
 
 The API is fully compatible with the sms-activate protocol. Change one line:
@@ -99,22 +105,32 @@ client = VirtualSMS.new('your_key', base_url: 'https://daisysms.com/stubs/handle
 client = VirtualSMS.new('your_key') # defaults to virtualsms.io
 ```
 
-## Why Real SIM Cards?
+## Why Real Carrier Numbers?
 
 - WhatsApp blocks 90%+ of VoIP numbers
 - Telegram flags and restricts VoIP accounts
 - Banking apps reject non-mobile numbers
-- VirtualSMS uses physical SIM cards = real carrier numbers = near-100% delivery
+- VirtualSMS uses real carrier numbers, not VoIP — near-100% delivery, with public pricing and live availability you can check before you buy
 
 [Learn more](https://virtualsms.io)
 
 ## Links
 
-- **Website:** [virtualsms.io](https://virtualsms.io)
-- **API Docs:** [virtualsms.io/api](https://virtualsms.io/api)
+- **Homepage:** [virtualsms.io](https://virtualsms.io)
+- **Docs (REST API):** [virtualsms.io/docs](https://virtualsms.io/docs)
+- **REST API:** [virtualsms.io/api/v1](https://virtualsms.io/api/v1)
+- **Hosted MCP server:** [virtualsms.io/mcp](https://virtualsms.io/mcp)
 - **Pricing:** [virtualsms.io/pricing](https://virtualsms.io/pricing)
 - **RubyGems:** [rubygems.org/gems/virtualsms-sdk](https://rubygems.org/gems/virtualsms-sdk)
 - **GitHub:** [github.com/virtualsms-io](https://github.com/virtualsms-io)
+
+## Ecosystem
+
+- Official MCP registry — `io.github.virtualsms-io/sms`
+- [VirtualSMS on Glama](https://glama.ai/mcp/servers)
+- [VirtualSMS on Smithery](https://smithery.ai/servers/virtualsms/virtualsms-mcp)
+- [VirtualSMS on mcp.so](https://mcp.so/servers/mcp-server-virtualsms-io)
+- [virtualsms-mcp on npm](https://www.npmjs.com/package/virtualsms-mcp) — hosted MCP server package
 
 ## License
 
