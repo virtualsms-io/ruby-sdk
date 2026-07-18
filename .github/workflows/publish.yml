@@ -1,0 +1,42 @@
+name: Publish to RubyGems
+
+# Builds and pushes the gem to RubyGems whenever a `v*` tag is pushed, e.g.
+# `git tag v2.0.0 && git push origin v2.0.0`. Requires the RUBYGEMS_API_KEY
+# repo secret (a RubyGems API key scoped to push access on this gem only).
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: read
+
+jobs:
+  publish:
+    name: Build and publish gem
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.3'
+          bundler-cache: true
+
+      - name: Run test suite
+        run: bundle exec rake test
+
+      - name: Build gem
+        run: gem build virtualsms-sdk.gemspec
+
+      - name: Publish to RubyGems
+        env:
+          RUBYGEMS_API_KEY: ${{ secrets.RUBYGEMS_API_KEY }}
+        run: |
+          mkdir -p ~/.gem
+          printf -- "---\n:rubygems_api_key: %s\n" "$RUBYGEMS_API_KEY" > ~/.gem/credentials
+          chmod 0600 ~/.gem/credentials
+          gem push virtualsms-sdk-*.gem

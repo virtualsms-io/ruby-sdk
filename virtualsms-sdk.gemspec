@@ -1,18 +1,21 @@
+require_relative 'lib/virtualsms/version'
+
 Gem::Specification.new do |spec|
   spec.name          = 'virtualsms-sdk'
-  spec.version       = '1.0.0'
+  spec.version       = VirtualSMS::VERSION
   spec.authors       = ['VirtualSMS']
   spec.email         = 'dev@virtualsms.io'
 
-  spec.summary       = 'VirtualSMS account verification platform: Ruby SDK for SMS verification ' \
-                        'with real carrier mobile numbers, not VoIP'
-  spec.description   = 'VirtualSMS is an account verification platform that combines real carrier ' \
-                        'mobile numbers, matching-country proxies and a private cloud browser into ' \
-                        'one connected workflow. This gem is the Ruby SDK for SMS verification: ' \
-                        'real physical SIM cards, not VoIP, across WhatsApp, Telegram, Google and ' \
-                        '2500+ services in 145+ countries, with 95%+ delivery on real carrier SIMs. ' \
-                        'Crypto payments. API compatible with the sms-activate protocol. See ' \
-                        'https://virtualsms.io/docs for full platform access.'
+  spec.summary       = 'Native Ruby client for the VirtualSMS REST API v1: SMS verification, ' \
+                        'number rentals and proxies behind one API key.'
+  spec.description   = 'VirtualSMS is an account verification platform for individuals, developers ' \
+                        'and AI agents. It combines one-time SMS verification with real carrier ' \
+                        'mobile numbers (not VoIP), dedicated number rentals, matching-country ' \
+                        'proxies and private cloud browser sessions behind one REST API, one MCP ' \
+                        'server, and one prepaid balance. This gem is a native client for the ' \
+                        '/api/v1 REST surface: services, countries, pricing, orders, rentals, ' \
+                        'proxies, account, browser sessions and webhooks. See https://virtualsms.io/docs ' \
+                        'for the full API reference.'
   spec.homepage      = 'https://virtualsms.io'
   spec.license       = 'MIT'
   spec.required_ruby_version = '>= 2.7.0'
@@ -20,13 +23,20 @@ Gem::Specification.new do |spec|
   spec.metadata = {
     'homepage_uri'      => 'https://virtualsms.io',
     'source_code_uri'   => 'https://github.com/virtualsms-io/ruby-sdk',
-    'documentation_uri' => 'https://virtualsms.io/api',
+    'documentation_uri' => 'https://virtualsms.io/docs',
     'changelog_uri'     => 'https://github.com/virtualsms-io/ruby-sdk/blob/main/CHANGELOG.md',
-    'bug_tracker_uri'   => 'https://github.com/virtualsms-io/ruby-sdk/issues'
+    'bug_tracker_uri'   => 'https://github.com/virtualsms-io/ruby-sdk/issues',
+    'rubygems_mfa_required' => 'true'
   }
 
-  spec.files         = Dir['lib/**/*.rb', 'README.md', 'LICENSE']
+  spec.files         = Dir['lib/**/*.rb', 'README.md', 'LICENSE', 'CHANGELOG.md']
   spec.require_paths = ['lib']
 
-  spec.add_dependency 'net-http', '~> 0.3'
+  # No runtime dependencies: net/http, uri, json, securerandom and time are
+  # all Ruby standard library, not gems. v1.0.0 declared a bogus `net-http`
+  # gem dependency (net/http has never been a separate gem); dropped in
+  # v2.0.0.
+
+  spec.add_development_dependency 'minitest', '~> 5.0'
+  spec.add_development_dependency 'webmock', '~> 3.0'
 end
