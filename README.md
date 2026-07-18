@@ -27,10 +27,12 @@ gem 'virtualsms-sdk'
 
 ## Quickstart
 
+<!-- TODO: re-point to /dashboard once the frontend migration ships -->
+
 ```ruby
 require 'virtualsms'
 
-# Get your API key at https://virtualsms.io/dashboard (Settings, API Keys)
+# Get your API key at https://virtualsms.io (Settings, API Keys)
 client = VirtualSMS.new(ENV.fetch('VIRTUALSMS_API_KEY'))
 
 # 1. Buy a number for WhatsApp verification in the UK
