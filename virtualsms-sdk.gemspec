@@ -22,10 +22,10 @@ Gem::Specification.new do |spec|
 
   spec.metadata = {
     'homepage_uri'      => 'https://virtualsms.io',
-    'source_code_uri'   => 'https://github.com/virtualsms-io/virtualsms-ruby-sdk',
+    'source_code_uri'   => 'https://github.com/virtualsms-io/ruby-sdk',
     'documentation_uri' => 'https://virtualsms.io/docs',
-    'changelog_uri'     => 'https://github.com/virtualsms-io/virtualsms-ruby-sdk/blob/main/CHANGELOG.md',
-    'bug_tracker_uri'   => 'https://github.com/virtualsms-io/virtualsms-ruby-sdk/issues',
+    'changelog_uri'     => 'https://github.com/virtualsms-io/ruby-sdk/blob/main/CHANGELOG.md',
+    'bug_tracker_uri'   => 'https://github.com/virtualsms-io/ruby-sdk/issues',
     'rubygems_mfa_required' => 'true'
   }
 
