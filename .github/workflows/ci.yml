@@ -22,4 +22,6 @@ jobs:
           bundler-cache: true
 
       - name: Test
-        run: bundle exec rake test || ruby -Itest test/*_test.rb
+        env:
+          VIRTUALSMS_API_KEY: ${{ secrets.VIRTUALSMS_API_KEY }}
+        run: bundle exec rake test || ruby -Ilib -Itest test/*_test.rb

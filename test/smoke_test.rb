@@ -2,13 +2,9 @@ require 'minitest/autorun'
 require 'virtualsms'
 
 # Minimum smoke test per the SDK v2.0.0 spec: get_balance + list_services
-# succeed against a real key or a throwaway one. list_services is a public
-# endpoint (no key required, no cost, safe to call from CI on every run).
-# get_balance requires an API key: if VIRTUALSMS_API_KEY is set in the
-# environment (CI secret / local .env), it's exercised against the live
-# endpoint; otherwise this test asserts the client-side guard fires
-# (BadApiKeyError, no network call made) so the suite still passes in CI
-# without a secret configured.
+# succeed against a real key. Both endpoints require a valid API key against
+# the live API, so both skip cleanly when VIRTUALSMS_API_KEY is unset and
+# run for real when the environment (CI secret / local .env) provides one.
 class SmokeTest < Minitest::Test
   def setup
     @api_key = ENV['VIRTUALSMS_API_KEY']
@@ -16,6 +12,8 @@ class SmokeTest < Minitest::Test
   end
 
   def test_list_services_succeeds_without_auth
+    skip 'VIRTUALSMS_API_KEY not set — skipping live smoke test' if @api_key.nil? || @api_key.empty?
+
     services = @client.list_services
     assert_kind_of Array, services
 
