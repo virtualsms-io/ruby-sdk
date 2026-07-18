@@ -955,14 +955,21 @@ class VirtualSMS
     when 402
       raise InsufficientBalanceError.new('Insufficient balance. Top up at https://virtualsms.io', status: status, body: data)
     when 404
-      if message =~ /no numbers?/i
-        raise NoNumbersError.new("No numbers available: #{message}", status: status, body: data)
-      end
-
       raise NotFoundError.new("Not found: #{message}", status: status, body: data)
     when 429
       raise RateLimitedError.new('Rate limit exceeded. Please slow down requests.', status: status, body: data)
     when 500..599
+      # Out-of-stock / no-numbers-available. The backend has no distinct
+      # status code for this today (confirmed gap -- see SDK spec "Error
+      # model"): a 503 with a body containing "out of stock" / "no numbers"
+      # is otherwise indistinguishable from any other 5xx. This SDK sniffs
+      # the message body to synthesize this subtype client-side.
+      # [UNVERIFIED -- backend enhancement needed: a distinct status/code,
+      # e.g. 409, would let SDKs drop this sniff.]
+      if message =~ /out of stock|no numbers?|no stock/i
+        raise NoNumbersError.new("No numbers currently available: #{message}", status: status, body: data)
+      end
+
       if is_mutating
         raise ServerError.new(
           "VirtualSMS had a server error (#{status}) on a request that may have made a purchase or changed state. " \

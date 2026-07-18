@@ -22,12 +22,6 @@ class VirtualSMS
   # HTTP 404 - resource not found (order/rental/proxy/webhook id, etc).
   class NotFoundError < Error; end
 
-  # HTTP 404 whose message indicates no stock for the requested
-  # service+country combo. Subclass of NotFoundError, so `rescue
-  # VirtualSMS::NotFoundError` still catches this; callers that want to
-  # special-case "no stock" vs. "bad id" can rescue NoNumbersError first.
-  class NoNumbersError < NotFoundError; end
-
   # HTTP 429 - rate limit exceeded. Never auto-retried by this SDK: fighting
   # the server's own rate limiter would be wrong.
   class RateLimitedError < Error; end
@@ -47,6 +41,17 @@ class VirtualSMS
       @retryable
     end
   end
+
+  # Out-of-stock / no-numbers-available. The backend has no distinct status
+  # code for this today (confirmed gap -- see SDK spec "Error model"): a 503
+  # with a body containing "out of stock" / "no numbers" is otherwise
+  # indistinguishable from any other 5xx. This SDK sniffs the message body
+  # to synthesize this subtype client-side, so it subclasses ServerError
+  # (not NotFoundError) -- `rescue VirtualSMS::ServerError` still catches
+  # this; callers that want to special-case "no stock" can rescue
+  # NoNumbersError first. [UNVERIFIED -- backend enhancement needed: a
+  # distinct status/code, e.g. 409, would let SDKs drop this sniff.]
+  class NoNumbersError < ServerError; end
 
   # Fallback for any other 4xx not covered above.
   class ApiError < Error; end
