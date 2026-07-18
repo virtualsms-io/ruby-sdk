@@ -1,12 +1,19 @@
 # VirtualSMS Ruby SDK
 
-VirtualSMS is an account verification platform for individuals, developers and AI agents. It combines one-time SMS verification, dedicated number rentals, matching-country proxies and private cloud browser sessions behind one API, one MCP server and one prepaid balance.
+## What is VirtualSMS?
+
+Official Ruby SDK for the VirtualSMS API. VirtualSMS is an account verification platform for
+individuals, developers, and AI agents: one-time SMS verification, dedicated number rentals,
+matching-country proxies, and private cloud browser sessions (beta), all behind one API, one
+MCP server, and one prepaid balance. This gem wraps the REST API in idiomatic Ruby, backed by
+real carrier-issued mobile numbers (real physical SIM cards, not VoIP) across 2500+ services
+in 145+ countries.
 
 Built for developers and AI agents: REST API, hosted MCP server, SDKs.
 
 This gem is a **native Ruby client for the VirtualSMS REST API v1** (`/api/v1/*`), covering the full public surface: services, countries, pricing, orders, rentals (Full Access and Platform tier), proxies, account, browser sessions and webhooks. It is not a wrapper around any third-party protocol.
 
-## Installation
+## Install
 
 ```bash
 gem install virtualsms-sdk
@@ -18,7 +25,7 @@ Or add to your Gemfile:
 gem 'virtualsms-sdk'
 ```
 
-## Quick Start
+## Quickstart
 
 ```ruby
 require 'virtualsms'
@@ -38,6 +45,33 @@ else
   puts "No code yet. Retry client.get_sms(order_id: order[:order_id]) later."
 end
 ```
+
+## Capabilities
+
+1. **One-time SMS verification.** Receive a code for a service like WhatsApp, Telegram, Discord,
+   or a dating app, on demand, from $0.05 per code.
+2. **Dedicated number rentals.** Hold one number for 1-30 days and receive SMS from any service
+   on that number, from $0.25/day.
+3. **Matching-country proxies.** Pair a number with an IP from the same country, across 223
+   proxy countries, from $1.10/GB.
+4. **Private cloud browser sessions (beta).** Start a country-matched browser in a live viewer
+   for the signup step itself, invite-only.
+
+## Why real SIM cards
+
+VirtualSMS runs on real carrier-issued mobile numbers, backed by real physical SIM cards,
+not VoIP. Services like WhatsApp, Telegram, Discord, and dating apps run a carrier lookup
+before they send a code, and VoIP or virtual numbers fail that check more often than a real
+SIM does. A physical SIM on a real carrier network reads like any other phone on that network,
+carriers like Vodafone, O2, and T-Mobile depending on the country, which is part of why
+VirtualSMS holds a 95%+ success rate across 2500+ services in 145+ countries.
+
+- WhatsApp blocks VoIP numbers
+- Telegram flags and restricts VoIP accounts
+- Banking apps reject non-mobile numbers
+- VirtualSMS uses real physical SIM cards, not VoIP, with 95%+ delivery, public pricing and live availability you can check before you buy
+
+[Learn more](https://virtualsms.io)
 
 ## Services and countries
 
@@ -172,18 +206,46 @@ end
 
 GET requests get a bounded, transparent retry (up to 3 attempts, exponential backoff) on network errors and 5xx responses. Mutating requests (POST/PUT/PATCH/DELETE) are never auto-retried by this SDK.
 
-## Why real carrier numbers?
-
-- WhatsApp blocks VoIP numbers
-- Telegram flags and restricts VoIP accounts
-- Banking apps reject non-mobile numbers
-- VirtualSMS uses real physical SIM cards, not VoIP, with 95%+ delivery, public pricing and live availability you can check before you buy
-
-[Learn more](https://virtualsms.io)
-
 ## Migrating from v1.x
 
 `v1.x` wrapped the legacy sms-activate-compatible dispatcher. `v2.x` talks to `/api/v1/*` REST endpoints directly and is a breaking change: methods now take keyword arguments (`service:`, `country:`) instead of positional sms-activate-style args, and every method returns a Ruby `Hash` with symbol keys. See `CHANGELOG.md` for the full diff.
+
+## AI agents and MCP
+
+This SDK is the API-client half: a typed Ruby wrapper around the REST API for scripts, backends,
+and agent frameworks that call Ruby directly. VirtualSMS also runs a separate hosted MCP server
+so an AI agent (Claude, Cursor, or any MCP-compatible client) can request a number, wait for a
+code, or manage a rental the same way a developer would call the API directly.
+
+## FAQ
+
+### What is VirtualSMS?
+
+VirtualSMS is an account verification platform for individuals, developers, and AI agents. It combines one-time SMS verification, dedicated number rentals, matching-country proxies, and private cloud browser sessions behind one API, one MCP server, and one prepaid balance.
+
+### Does VirtualSMS use real SIM cards or VoIP numbers?
+
+VirtualSMS uses real carrier-issued mobile numbers, backed by real physical SIM cards, not VoIP. Many services, including WhatsApp, Telegram, Discord, and dating apps, reject VoIP and virtual numbers at signup; a real physical SIM on a real carrier network passes that check far more often, which is reflected in a 95%+ success rate.
+
+### Which services and countries does VirtualSMS support?
+
+VirtualSMS covers 2500+ services across 145+ countries for SMS verification and number rentals, plus matching-country proxies across 223 proxy countries. Coverage spans messaging apps, social platforms, marketplaces, dating apps, and financial services.
+
+### Can I rent a number, or only buy one-time codes?
+
+Both. Buy a single one-time code from $0.05, or rent a dedicated number for 1-30 days from $0.25/day to receive SMS from any service on that number for the rental window.
+
+### Does VirtualSMS work with AI agents and MCP?
+
+Yes. VirtualSMS exposes a hosted MCP server plus a REST API and official SDKs in nine languages, so an AI agent can request a number, wait for a code, or manage a rental the same way a developer would call the API directly.
+
+### How much does VirtualSMS cost?
+
+Pricing is pay-as-you-go from one prepaid balance: SMS verification from $0.05 per code, number rentals from $0.25/day, and proxies from $1.10/GB. There is no subscription requirement.
+
+### Is there a free API key?
+
+Yes. Creating a VirtualSMS account issues an API key immediately, at no cost. You only spend from your prepaid balance when you place an order: an activation, a rental, or a proxy.
 
 ## Links
 
@@ -194,6 +256,7 @@ GET requests get a bounded, transparent retry (up to 3 attempts, exponential bac
 - **Pricing:** [virtualsms.io/pricing](https://virtualsms.io/pricing)
 - **RubyGems:** [rubygems.org/gems/virtualsms-sdk](https://rubygems.org/gems/virtualsms-sdk)
 - **GitHub:** [github.com/virtualsms-io](https://github.com/virtualsms-io)
+- **Other SDKs:** PHP, Node.js/TypeScript, Python, .NET, Go, Rust, Swift, and Java, all under [github.com/virtualsms-io](https://github.com/virtualsms-io)
 
 ## Ecosystem
 

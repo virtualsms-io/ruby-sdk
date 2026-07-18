@@ -6,16 +6,14 @@ Gem::Specification.new do |spec|
   spec.authors       = ['VirtualSMS']
   spec.email         = 'dev@virtualsms.io'
 
-  spec.summary       = 'Native Ruby client for the VirtualSMS REST API v1: SMS verification, ' \
-                        'number rentals and proxies behind one API key.'
-  spec.description   = 'VirtualSMS is an account verification platform for individuals, developers ' \
-                        'and AI agents. It combines one-time SMS verification with real carrier ' \
-                        'mobile numbers (not VoIP), dedicated number rentals, matching-country ' \
-                        'proxies and private cloud browser sessions behind one REST API, one MCP ' \
-                        'server, and one prepaid balance. This gem is a native client for the ' \
-                        '/api/v1 REST surface: services, countries, pricing, orders, rentals, ' \
-                        'proxies, account, browser sessions and webhooks. See https://virtualsms.io/docs ' \
-                        'for the full API reference.'
+  spec.summary       = 'Official Ruby SDK for the VirtualSMS account verification API.'
+  spec.description   = 'VirtualSMS is an account verification platform for individuals, developers, ' \
+                        'and AI agents. It combines one-time SMS verification, dedicated number ' \
+                        'rentals, matching-country proxies, and private cloud browser sessions ' \
+                        'behind one API, one MCP server, and one prepaid balance. This gem is the ' \
+                        'official Ruby client for the VirtualSMS REST API, backed by real ' \
+                        'carrier-issued mobile numbers (real physical SIM cards, not VoIP) across ' \
+                        '2500+ services in 145+ countries.'
   spec.homepage      = 'https://virtualsms.io'
   spec.license       = 'MIT'
   spec.required_ruby_version = '>= 2.7.0'
